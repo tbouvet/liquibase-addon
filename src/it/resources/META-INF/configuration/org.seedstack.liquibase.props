@@ -56,6 +56,7 @@ changelog = META-INF/configuration/databaseChangelog.xml
 datasource = app-datasource
 failOnError = true
 contexts = dev
+schema = PUBLIC
 
 # The following section resets to properties without prefix
 

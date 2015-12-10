@@ -46,6 +46,7 @@ import liquibase.resource.ResourceAccessor;
  */
 public class LiquibasePlugin extends AbstractPlugin {
 
+	private static final String SCHEMA_CONFIG = "schema";
 	private static final String CONTEXTS_CONFIG = "contexts";
 	private static final String FAIL_ON_ERROR_CONFIG = "failOnError";
 	private static final String CHANGELOG_CONFIG = "changelog";
@@ -93,6 +94,7 @@ public class LiquibasePlugin extends AbstractPlugin {
 		String ds = configuration.getString(DATASOURCE_CONFIG);
 		String changelog = configuration.getString(CHANGELOG_CONFIG);
 		String contexts = configuration.getString(CONTEXTS_CONFIG);
+		String defaultSchema = configuration.getString(SCHEMA_CONFIG);
 		LOGGER.info("Apply changelog [{}] to the datasource [{}]", changelog, ds);
 		Connection connection = null;
 		Database database = null;
@@ -100,6 +102,7 @@ public class LiquibasePlugin extends AbstractPlugin {
 			connection = jdbcRegistry.getDataSource(ds).getConnection();
 			connection.setAutoCommit(false);
 			database = createDatabase(connection);
+			database.setDefaultSchemaName(defaultSchema);
 			Thread currentThread = Thread.currentThread();
 			ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 			ResourceAccessor threadClFO = new ClassLoaderResourceAccessor(contextClassLoader);
