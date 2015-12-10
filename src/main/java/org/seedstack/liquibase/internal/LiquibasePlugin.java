@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013-2015, The SeedStack authors <http://seedstack.org>
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 package org.seedstack.liquibase.internal;
 
 import java.sql.Connection;
@@ -31,6 +38,12 @@ import liquibase.resource.CompositeResourceAccessor;
 import liquibase.resource.FileSystemResourceAccessor;
 import liquibase.resource.ResourceAccessor;
 
+/**
+ * Plugin to alter/create a database with {@link Liquibase}.
+ * 
+ * @author thierry.bouvet@mpsa.com
+ *
+ */
 public class LiquibasePlugin extends AbstractPlugin {
 
 	private static final String CONTEXTS_CONFIG = "contexts";
