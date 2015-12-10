@@ -1,0 +1,55 @@
+# Add application module configuration here. A section apply a prefix to the properties following, until another
+# section is encountered. Check https://seed.mpsa.com/#!/seed-doc/core/configuration for more information.
+
+[org.seedstack.seed]
+core.application-id = TestLiquibase
+core.application-name = Liquibase
+core.application-version = 1.0.0-M1
+
+[]
+
+org.seedstack.jdbc.datasources = app-datasource
+
+####################################################################
+# Persistence
+####################################################################
+[org.seedstack.jdbc.datasource.app-datasource]
+driver = org.hsqldb.jdbcDriver
+url = jdbc:hsqldb:mem:training
+user = sa
+password =
+property.sql.enforce_strict_size = true
+
+[]
+
+org.seedstack.jpa.units = my-jpa-unit
+[org.seedstack.jpa.unit.my-jpa-unit]
+datasource = app-datasource
+property.hibernate.dialect = org.hibernate.dialect.HSQLDialect
+property.hibernate.hbm2ddl.auto = validate
+#property.hibernate.show_sql = true
+
+
+[org.seedstack.liquibase.features.*]
+jpa-unit = my-jpa-unit
+
+# The following section is used by ConfigurationRealm, the default security realm, which should be replaced by a
+# more useful one like ClpRealm.
+# Check https://seed.mpsa.com/#!/seed-doc/security for more information.
+
+[org.seedstack.seed.security.users]
+username = password
+
+[]
+
+org.seedstack.liquibase.changesets = change1
+[org.seedstack.liquibase.changeset.change1]
+changelog = META-INF/configuration/databaseChangelog.xml
+datasource = app-datasource
+failOnError = true
+contexts = dev
+
+# The following section resets to properties without prefix
+
+[]
+

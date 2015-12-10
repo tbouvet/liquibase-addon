@@ -24,7 +24,10 @@
         <seed.version>2.1.0</seed.version>
         <jdbc.version>2.1.0</jdbc.version>
         <jpa.version>2.1.0</jpa.version>
-
+        <hibernate.version>4.3.7.Final</hibernate.version>
+        <logback.version>1.1.2</logback.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
+		
         <compatibility.skip>true</compatibility.skip>
     </properties>
 
@@ -65,6 +68,11 @@
     </build>
 
     <dependencies>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>3.4.2</version>
+		</dependency>
         <dependency>
             <groupId>org.seedstack.seed</groupId>
             <artifactId>seed-core</artifactId>
@@ -84,12 +92,37 @@
             <groupId>org.seedstack.addons.jpa</groupId>
             <artifactId>jpa</artifactId>
             <version>${jpa.version}</version>
+            <optional>true</optional>
         </dependency>
-
+		<!-- JPA implementation only for tests-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.seedstack.seed</groupId>
             <artifactId>seed-testing</artifactId>
             <version>${seed.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
